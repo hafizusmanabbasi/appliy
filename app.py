@@ -81,6 +81,23 @@ def get_classifier(classifier_name, params):
             max_depth=params['max_depth'], random_state=1234)
     return clf
 
+if st.checkbox('show code'):
+    with st.echo():
+        # ab is function ko bula lay gayn or clf variable k equal rakh layn gay
+        clf = get_classifier(classifier_name, params)
+
+        # ab hum apnay dataset ko test and train data may split kr laytay han by 80/20 ratio
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+
+        # ab hum nay apnay classifier ki training krni ha 
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
+
+        # model ka accuracy score check kr layna ha or isay app pay print kr dayna ha
+        acc = accuracy_score(y_test, y_pred)
+        st.write(f'Classifier = {classifier_name}')
+        st.write(f'Accuracy =', acc)
+
 # ab is function ko bula lay gayn or clf variable k equal rakh layn gay
 clf = get_classifier(classifier_name, params)
 
